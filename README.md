@@ -167,8 +167,8 @@ to build from source.
 These releases contain 3 binaries:
 
  - `ct_node`: a version of Node.js that natively supports the use of CT-Wasm.
- - `ct2wasm`: a build of the spec interpreter. Secrecy labels can be stripped with the `-strip` flag.
- - `ct_wasm_spec`: a build of the spec interpreter that supports primitive secrecy inference through the `-r` flag.
+ - `ct2wasm`: tool for removing secrecy labels. Since this is built in the interpreter the `-strip` flag is required.
+ - `ct_wasm_spec`: a build of the spec interpreter. The interpreter supports simple secrecy inference via the `-r` flag.
 
 
 ### Source Distribution
