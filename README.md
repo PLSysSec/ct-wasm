@@ -176,7 +176,7 @@ These releases contain 3 binaries:
 CT-Wasm efforts are split across a few different repositories. The evaluation step pulls from these directly. We include the links for complteness.
 
  - [`ct-wasm-node`](https://github.com/PLSysSec/ct-wasm-node): An implementation of CT-Wasm Node.js/V8.
- - [`ct-wasm-spec`](https://github.com/PLSysSec/ct-wasm-spec): Reference OCaml implementation CT-Wasm.
+ - [`ct-wasm-spec`](https://github.com/PLSysSec/ct-wasm-spec): Reference OCaml implementation CT-Wasm with accompanying label stripping and label inference tools.
  - [`ct-wasm-ports`](https://github.com/PLSysSec/ct-wasm-ports): Crypto algorithm implementations and evaluation scripts.
  - [`tweetnacl-ctwasm`](https://github.com/PLSysSec/tweetnacl-ctwasm): A port of the TweetNacl library with secrecy annotations.
  - [`ct-wasm-proofs`](https://github.com/PLSysSec/ct-wasm-proofs): Mechanizations (in Isabelle) of all proofs in the paper.
