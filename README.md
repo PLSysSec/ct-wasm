@@ -39,12 +39,7 @@ primitives---Salsa20, SHA-256, and TEA - and the full TweetNaCl library. We
 find that CT-Wasm is fast, expressive, and generates code that we
 experimentally measure to be constant-time.
 
-## Resources
-
-Below are links to our CT-Wasm implementations, our evaluation suite, and
-mechanizations
-
-#### Reproducing eval results
+## Reproducing eval results
 We provide automated scripts for reproducing the evaluation results in the
 `ct-wasm-ports` repository. This repository contains a collection of programs
 ported to CT-Wasm.
@@ -120,7 +115,7 @@ TWEET_TRIALS=10 make tweetnacl
 
 This will store the results in `results/node_tweetnacl.csv`.
 
-#### CT-Wasm implementations
+## CT-Wasm implementations
 
 - [Reference interpreter](https://github.com/PLSysSec/ct-wasm-spec).
 - [Node.js implementation](https://github.com/PLSysSec/ct-wasm-node)
@@ -134,18 +129,16 @@ releases](https://github.com/PLSysSec/ct-wasm-spec/releases/artifact) for macOS
 and 64 bit Linux. Other platforms should work, but are untested and will need
 to build from source.
 
-Chromium is notoriously difficult to maintain a fork for, so we provide a
-pre-built binary. It uses the same modifications performed in the V8
-subdirectory of our Node.js interpreter.
-
 These releases contain 3 binaries:
 
  - `ct_node`: a version of node.js that natively supports the use of CT-Wasm.
  This version has been measured by [dude-ct](https://github.com/PLSysSec/dudect) to provide constant-time guarantees.
  - `ct2wasm`: a build of the spec interpreter that supports secrecy stripping through the `-strip` flag.
+ - `ct_wasm_spec`: a build of the spec interpreter that supports primitive secrecy inference through the `-r` flag.
 
-#### Chromium Builds
-
+Chromium is notoriously difficult to maintain a fork for, so we provide a
+pre-built binary. It uses the same modifications performed in the V8
+subdirectory of our Node.js interpreter.
 
 ### Source Distribution
 
@@ -153,55 +146,6 @@ CT-Wasm efforts are split across a few different repositories:
 
  - [`ct-wasm-node`](https://github.com/PLSysSec/ct-wasm-node): An implementation in Node/V8
  - [`ct-wasm-ports`](https://github.com/PLSysSec/ct-wasm-ports): Algorithm implementations and evaluation scripts
- - [`tweetnalc-ctwasm`](https://github.com/PLSysSec/tweetnacl-ctwasm): A port of the TweetNacl library with secrecy annotations
+ - [`tweetnacl-ctwasm`](https://github.com/PLSysSec/tweetnacl-ctwasm): A port of the TweetNacl library with secrecy annotations
  - [`ct-wasm-proofs`](https://github.com/PLSysSec/ct-wasm-proofs): Mechanizations (in Isabelle) of all proofs in the paper
-
-#### Using the source
-For building from source, we recommend pulling down
-[`ct-wasm-ports`](https://github.com/PLSysSec/ct-wasm-ports) and running
-`make tools` from the `eval` directory. This will automatically pull and
-build the relevant repositories.
-
-The eval directory also provides a single command to collect all data to
-replicate the Evaluation section of the POPL 2019 paper. More details can be
-found in the `eval` directory's `README`.
-
-## Summary of spec changes
-
-### New Types
- - `s32`: Secret 32 bit integer
- - `s64`: Secret 64 bit integer
-
-These types come with all integer operations except `div` and `rem` which are
-notoriously non-CT and can leak information through partiality.
-
-### New Memory Type
-Memories can be either secret or public.
-
-They are declared in text as:
-`(memory secret 0 10)`
-
-Secret memories accept and produce secret values but require public indices for stores and loads
-
-```lisp
-(module
-    (memory secret 1)
-
-    (func $store_example
-        (s32.store (i32.const 0) (s32.const 1))))
-```
-
-### Declassification
-Declassification allows the relabeling of secret data as public. This is inherently unsound but important to operations such as encryption which produce a safely public value out of a secret one.
-
-This is performed by the two operators:
- - `i32.declassify`
- - `i64.declassify`
-
-These operators are only allowed inside **trusted functions**. By default, functions are trusted.
-Trust is built into the type of a function like so:
-
-```lisp
-(func untrusted (param s32) (result i32)
-    ...)
-```
+ - [`dudect`](https://github.com/PLSysSec/ct-wasm-proofs): A fork of dudect that's compatible with our instrumented node.
