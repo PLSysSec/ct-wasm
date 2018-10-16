@@ -119,7 +119,7 @@ This will store the results in `results/node_tweetnacl.csv`.
 
 Our mechanization effort and instructions for running Isabelle are described in the  [`ct-wasm-proofs`](https://github.com/PLSysSec/ct-wasm-proofs) repository.
 
-## CT-Wasm implementations
+## CT-Wasm Implementations
 
 Though the evaluation scripts above pull the Node.js implementation of CT-Wasm, we include references to all our implementations for completeness:
 
@@ -144,10 +144,11 @@ These releases contain 3 binaries:
 
 ### Source Distribution
 
-CT-Wasm efforts are split across a few different repositories. THe evaluation step pulls from these directly. We include the links for complteness.
+CT-Wasm efforts are split across a few different repositories. The evaluation step pulls from these directly. We include the links for complteness.
 
- - [`ct-wasm-node`](https://github.com/PLSysSec/ct-wasm-node): An implementation in Node.js/V8.
- - [`ct-wasm-ports`](https://github.com/PLSysSec/ct-wasm-ports): Algorithm implementations and evaluation scripts.
+ - [`ct-wasm-node`](https://github.com/PLSysSec/ct-wasm-node): An implementation of CT-Wasm Node.js/V8.
+ - [`ct-wasm-spec`](https://github.com/PLSysSec/ct-wasm-spec): Reference OCaml implementation CT-Wasm.
+ - [`ct-wasm-ports`](https://github.com/PLSysSec/ct-wasm-ports): Crypto algorithm implementations and evaluation scripts.
  - [`tweetnacl-ctwasm`](https://github.com/PLSysSec/tweetnacl-ctwasm): A port of the TweetNacl library with secrecy annotations.
  - [`ct-wasm-proofs`](https://github.com/PLSysSec/ct-wasm-proofs): Mechanizations (in Isabelle) of all proofs in the paper.
  - [`dudect`](https://github.com/PLSysSec/ct-wasm-proofs): A fork of dudect that's compatible with our instrumented node.
