@@ -78,7 +78,7 @@ Simply clone the repository and enter the `eval` directory:
 ```bash
 git clone https://github.com/PLSysSec/ct-wasm-ports
 cd ct-wasm-ports/eval
-``
+```
 
 *All subsequent make commands below should be performed within this directory*
 
