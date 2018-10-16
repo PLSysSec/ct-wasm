@@ -125,7 +125,7 @@ Though the evaluation scripts above pull the Node.js implementation of CT-Wasm, 
 
 - [Reference interpreter](https://github.com/PLSysSec/ct-wasm-spec)
 - [Node.js implementation](https://github.com/PLSysSec/ct-wasm-node)
-- [Chromium implementation](https://github.com/PLSysSec/ct-wasm-chrome)
+- [Chromium implementation](https://github.com/PLSysSec/ct-wasm-chromium)
 
 Our implementations fork existing projects, so unless otherwise highlighted,
 you should follow the standard build and installation process.
