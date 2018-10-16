@@ -41,7 +41,7 @@ experimentally measure to be constant-time.
 
 ## Reproducing eval results
 We provide automated scripts for reproducing the evaluation results in the
-`ct-wasm-ports` repository. This repository contains a collection of programs
+[`ct-wasm-ports`](https://github.com/PLSysSec/ct-wasm-ports) repository. This repository contains a collection of programs
 ported to CT-Wasm.
 
 Simply clone the repository and enter the `eval` directory:
@@ -51,13 +51,13 @@ git clone https://github.com/PLSysSec/ct-wasm-ports
 cd ct-wasm-ports/eval
 ```
 
-**All make commands should be performed within this directory**
+*All make commands below should be performed within this directory*
 
 #### Validation Performance
-We measure the performance of our validator in `ct_node` against a baseline (but
-instrumented) node.js. The following command will build `ct_node` and `node` (as necessary), and measure the time to validate a series of CT-Wasm programs.
+We measure the performance of our validator as implemented in the Node.js runtime (`ct_node`) against a baseline (but
+instrumented) Node.js. The following command will build `ct_node` and `node` (as necessary), and measure the time to validate a series of CT-Wasm programs.
 
-```
+```bash
 make validation
 ```
 
@@ -84,19 +84,19 @@ Results can be found in `results/crypto_benchmarks.csv` measured in cycles.
 Salsa20 and SHA-256 measure the cycles to encrypt 4KB, while TEA measures the
 cycles to encrypt 8 bytes.
 
-#### Statistical Timing (dudect)
+#### Statistical Timing for Security with dudect
 We empirically measure the timing characteristics using a modified version of
-dudect, which works by collecting samples for a fixed amount of time. By
-default, that time is 10 seconds. The following command will build our modified dudect and our extended node.js (`ct_node`) if not already built, and will collect the data into `results/dudect`:
+[dudect](https://github.com/oreparaz/dudect), which works by collecting samples for a fixed amount of time. By
+default, that time is 10 seconds. The following command will build our [modified dudect](https://github.com/PLSysSec/dudect) and our extended Node.js (`ct_node`) if not already built, and will collect the data into `results/dudect`:
 
-```
+```bash
 DUDE_TIMEOUT=10 make dudect
 ```
 
 where `DUDE_TIMEOUT` is the sampling time in seconds. The `make` command will
 not do anything if you have results already present on disk.
 
-#### Bytecode Sizes
+#### Bytecode Size Overhead
 The following command will translate a variety of programs written in CT-Wasm
 to bytecode and measure their size:
 
@@ -107,7 +107,7 @@ make bytecode_sizes
 The output can be found in `results/file_sizes.csv`.
 
 #### Node TweetNacl Benchmarks
-TweetNacl ships with a series of benchmarks that measure the performance of its various APIs. These benchmarks take a while to execute. We run their benchmarks a number of times, taking the median value, like so:
+[TweetNacl](https://github.com/TorstenStueber/TweetNacl-WebAssembly) ships with a series of benchmarks that measure the performance of its various APIs. These benchmarks take a while to execute. We run their benchmarks a number of times (10 bellow), taking the median value, like so:
 
 ```
 TWEET_TRIALS=10 make tweetnacl
@@ -117,9 +117,11 @@ This will store the results in `results/node_tweetnacl.csv`.
 
 ## CT-Wasm implementations
 
-- [Reference interpreter](https://github.com/PLSysSec/ct-wasm-spec).
+Though the evaluation scripts above pull the Node.js implementation of CT-Wasm, we include references to all our implementations for completeness:
+
+- [Reference interpreter](https://github.com/PLSysSec/ct-wasm-spec)
 - [Node.js implementation](https://github.com/PLSysSec/ct-wasm-node)
-- [Chromium implementation]()
+- [Chromium implementation](https://github.com/PLSysSec/ct-wasm-chrome)
 
 Our implementations fork existing projects, so unless otherwise highlighted,
 you should follow the standard build and installation process.
@@ -131,18 +133,14 @@ to build from source.
 
 These releases contain 3 binaries:
 
- - `ct_node`: a version of node.js that natively supports the use of CT-Wasm.
- This version has been measured by [dude-ct](https://github.com/PLSysSec/dudect) to provide constant-time guarantees.
- - `ct2wasm`: a build of the spec interpreter that supports secrecy stripping through the `-strip` flag.
+ - `ct_node`: a version of Node.js that natively supports the use of CT-Wasm.
+ - `ct2wasm`: a build of the spec interpreter. Secrecy labels can be stripped with the `-strip` flag.
  - `ct_wasm_spec`: a build of the spec interpreter that supports primitive secrecy inference through the `-r` flag.
 
-Chromium is notoriously difficult to maintain a fork for, so we provide a
-pre-built binary. It uses the same modifications performed in the V8
-subdirectory of our Node.js interpreter.
 
 ### Source Distribution
 
-CT-Wasm efforts are split across a few different repositories:
+CT-Wasm efforts are split across a few different repositories. THe evaluation step pulls from these directly. We include the links for complteness.
 
  - [`ct-wasm-node`](https://github.com/PLSysSec/ct-wasm-node): An implementation in Node/V8
  - [`ct-wasm-ports`](https://github.com/PLSysSec/ct-wasm-ports): Algorithm implementations and evaluation scripts
