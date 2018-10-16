@@ -151,4 +151,4 @@ CT-Wasm efforts are split across a few different repositories. THe evaluation st
  - [`tweetnacl-ctwasm`](https://github.com/PLSysSec/tweetnacl-ctwasm): A port of the TweetNacl library with secrecy annotations.
  - [`ct-wasm-proofs`](https://github.com/PLSysSec/ct-wasm-proofs): Mechanizations (in Isabelle) of all proofs in the paper.
  - [`dudect`](https://github.com/PLSysSec/ct-wasm-proofs): A fork of dudect that's compatible with our instrumented node.
- - [`ct-wasm-chrome`](https://github.com/PLSysSec/ct-wasm-chrome): V8 patches (same as Node.js) for Chromium.
+ - [`ct-wasm-chromium`](https://github.com/PLSysSec/ct-wasm-chromium): V8 patches (same as Node.js) for Chromium.
