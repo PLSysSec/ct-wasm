@@ -39,17 +39,12 @@ primitives---Salsa20, SHA-256, and TEA - and the full TweetNaCl library. We
 find that CT-Wasm is fast, expressive, and generates code that we
 experimentally measure to be constant-time.
 
-## Reproducing eval results
+## Reproducing Evaluation Results
 We provide automated scripts for reproducing the evaluation results in the
 [`ct-wasm-ports`](https://github.com/PLSysSec/ct-wasm-ports) repository. This repository contains a collection of programs
 ported to CT-Wasm.
 
-Simply clone the repository and enter the `eval` directory:
-
-```bash
-git clone https://github.com/PLSysSec/ct-wasm-ports
-cd ct-wasm-ports/eval
-```
+First, install prequisites:
 
 ### Build Prequisites
 
@@ -65,22 +60,25 @@ cd ct-wasm-ports/eval
 
 **Node.js w/ CT-WASM**
 
-    gcc and g++ 4.9.4 or newer, or
-    clang and clang++ 3.4.2 or newer (macOS: latest Xcode Command Line Tools)
-    Python 2.6 or 2.7
-    GNU Make 3.81 or newer
+ - gcc and g++ 4.9.4 or newer, or
+ - clang and clang++ 3.4.2 or newer (macOS: latest Xcode Command Line Tools)
+ - Python 2.6 or 2.7
+ - GNU Make 3.81 or newer
 
 **Reference Interpreter**
-Ocaml >= 4.05
-ocamlbuild
-Ocaml num library (for extracted verified compiler)
 
-OPAM users can install the num library with:
+- Ocaml >= 4.05
+- ocamlbuild
+- Ocaml num library (for extracted verified compiler). OPAM users can install the num library with: `opam install num`
+
+### Building Evalutation Suite
+
+Simply clone the repository and enter the `eval` directory:
 
 ```bash
-$ opam install num
-```
-
+git clone https://github.com/PLSysSec/ct-wasm-ports
+cd ct-wasm-ports/eval
+``
 
 *All subsequent make commands below should be performed within this directory*
 
